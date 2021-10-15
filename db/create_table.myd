@@ -1,0 +1,20 @@
+create TABLE UTILIZADORES(
+    id_utilizador INT auto_increment PRIMARY KEY,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    data_criacao DATE NOT NULL
+);
+
+create TABLE FICHEIROS(
+    id_ficheiro INT auto_increment PRIMARY KEY,
+    nome_ficheiro TEXT NOT NULL,
+    tipo_ficheiro varchar(10) NOT NULL,
+    tamanho_em_mb DOUBLE NOT NULL,
+    id_utilizador_criador INT,
+    CONSTRAINT `fk_utilizador_ficheiro`
+        FOREIGN KEY (id_utilizador_criador) references UTILIZADORES (id_utilizador)
+        ON DELETE CASCADE
+        ON UPDATE RESTRICT
+);
+insert into UTILIZADORES (username, password, data_criacao) values ('martinho', 'martinho',NOW());
+insert into FICHEIROS (nome_ficheiro, tipo_ficheiro, tamanho_em_mb, id_utilizador_criador) values ('teste', 'png',10.0,1);
